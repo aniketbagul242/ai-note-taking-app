@@ -5,6 +5,8 @@ import AIButtons from "../AIButtons/AIButtons";
 const NoteEditor = ({ initialData = {}, onSave, onCancel }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
+
 
   //  Sync editor when editing different note
   useEffect(() => {
@@ -12,18 +14,26 @@ const NoteEditor = ({ initialData = {}, onSave, onCancel }) => {
     setContent(initialData.content || "");
   }, [initialData]);
 
-  const handleSave = () => {
+  const handleSave = async () => {
 
     if (!title.trim() || !content.trim()) {
       alert("Please enter title and content");
       return;
     }
 
-    onSave({
-      _id: initialData._id,
-      title,
-      content,
-    });
+    try {
+      setIsSaving(true);
+
+      await onSave({
+        _id: initialData._id,
+        title,
+        content,
+      });
+
+    } finally {
+      setIsSaving(false);
+    }
+
   };
 
   return (
@@ -58,9 +68,14 @@ const NoteEditor = ({ initialData = {}, onSave, onCancel }) => {
           <button
             type="button"
             onClick={handleSave}
-            className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
+            disabled={isSaving}
+            className={`px-4 py-1 rounded text-white transition
+             ${isSaving
+                ? "bg-green-400 cursor-not-allowed"
+                : "bg-green-500 hover:bg-green-600"
+              }`}
           >
-            Save
+            {isSaving ? "Saving..." : "Save"}
           </button>
 
 
