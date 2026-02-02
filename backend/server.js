@@ -8,7 +8,7 @@ import aiRouter from "./routes/aiRoutes.js";
 
 
 dotenv.config();
-const PORT = process.env.PORT ;
+const PORT = process.env.PORT;
 
 const app = express();
 
@@ -18,15 +18,15 @@ app.use(express.json()); // middleware
 
 connectDB();
 
-app.post("/test", (req, res) => {
-  console.log("BODY:", req.body);
-  res.json(req.body);
+
+app.get("/", (req, res) => {
+  res.status(200).send("Server is running ");
 });
 
 
 // api endpoint
-app.use("/api/auth", userRouter );
-app.use("/api/notes", noteRouter );
+app.use("/api/auth", userRouter);
+app.use("/api/notes", noteRouter);
 app.use("/api/ai", aiRouter);
 
 
