@@ -3,6 +3,8 @@
 **AI-powered note-taking application** with features like note summarization, content improvement, and automatic tagging.  
 Built as a full-stack MERN application for a POC developer assignment.
 
+Live Demo - https://ai-note-taking-app-seven.vercel.app/
+
 ---
 
 ## 📝 Project Overview
@@ -70,3 +72,4 @@ npm start
 cd ../frontend
 npm install
 npm start
+
