@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:3000", 
+  baseURL: "https://ai-note-taking-app-mm9o.onrender.com", 
   headers: {
     "Content-Type": "application/json",
   },
@@ -17,3 +17,4 @@ API.interceptors.request.use((config) => {
 });
 
 export default API;
+
